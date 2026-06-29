@@ -30,9 +30,13 @@ function operate(operator, number1, number2) {
     }
 }
 
-const body = document.querySelector("body");
+const btn = document.querySelectorAll(".button");
+let displayBox = document.querySelector(".displayBox");
 
-const btn = document.querySelector(".button");
-btn.addEventListener("click", () => {
-  alert("Hello World");
+//let displayNumber = 0
+
+for(let i = 0; i < btn.length; i++) {
+    btn[i].addEventListener("click", () => {
+        console.log(displayBox.innerText = btn[i].innerText)
 });
+}
