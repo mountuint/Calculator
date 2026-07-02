@@ -39,7 +39,6 @@ for (let i = 0; i < btn.length; i++) {
   if (Number.isFinite(Number(btn[i].textContent))) {
     btn[i].addEventListener("click", () => {
       console.log((displayBox.innerText += btn[i].innerText));
-      
     });
   } else if (
     btn[i].textContent === "+" ||
@@ -49,8 +48,14 @@ for (let i = 0; i < btn.length; i++) {
   ) {
     btn[i].addEventListener("click", () => {
       console.log((displayBox.innerText += btn[i].innerText))
+      operator = displayBox.innerText
+      console.log(operator)
     });
-  } 
+  } else if (btn[i].textContent === "=") {
+    btn[i].addEventListener("click", () => {
+      console.log(operate(operator, firstNumber, secondNumber))
+    });
+  }
 }
 
 /*if (Number.isFinite(Number(btn[10].textContent)) === false) {
