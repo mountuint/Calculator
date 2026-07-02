@@ -39,7 +39,22 @@ for (let i = 0; i < btn.length; i++) {
   if (Number.isFinite(Number(btn[i].textContent))) {
     btn[i].addEventListener("click", () => {
       console.log((displayBox.innerText += btn[i].innerText));
+      
     });
-  }
-  
+  } else if (
+    btn[i].textContent === "+" ||
+    btn[i].textContent === "-" ||
+    btn[i].textContent === "*" ||
+    btn[i].textContent === "/"
+  ) {
+    btn[i].addEventListener("click", () => {
+      console.log((displayBox.innerText += btn[i].innerText))
+    });
+  } 
 }
+
+/*if (Number.isFinite(Number(btn[10].textContent)) === false) {
+    btn[10].addEventListener("click", () => {
+      console.log((displayBox.innerText += btn[10].innerText));
+    });
+  }*/
