@@ -38,7 +38,8 @@ let displayBox = document.querySelector(".displayBox");
 for (let i = 0; i < btn.length; i++) {
   if (Number.isFinite(Number(btn[i].textContent))) {
     btn[i].addEventListener("click", () => {
-      console.log((displayBox.innerText += btn[i].innerText));
+      displayBox.innerText += btn[i].innerText;
+      console.log(displayBox.innerText)
     });
   } else if (
     btn[i].textContent === "+" ||
@@ -47,13 +48,16 @@ for (let i = 0; i < btn.length; i++) {
     btn[i].textContent === "/"
   ) {
     btn[i].addEventListener("click", () => {
-      console.log((displayBox.innerText += btn[i].innerText))
-      operator = displayBox.innerText
-      console.log(operator)
+      firstNumber = displayBox.innerText
+      alert(firstNumber)
+      displayBox.innerText += btn[i].innerText;
+      operator = displayBox.innerText;
+      console.log(operator);
     });
   } else if (btn[i].textContent === "=") {
     btn[i].addEventListener("click", () => {
-      console.log(operate(operator, firstNumber, secondNumber))
+      console.log(firstNumber);
+      console.log(operate(operator, firstNumber, secondNumber));
     });
   }
 }
