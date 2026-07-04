@@ -55,7 +55,13 @@ for (let i = 0; i < btn.length; i++) {
     btn[i].addEventListener("click", () => {
       let indexOfOperator = displayBox.innerText.indexOf(operator)
       let secondNumber = Number(displayBox.innerText.substring(indexOfOperator + 1, displayBox.innerText.length))
-      console.log(operate(operator, firstNumber, secondNumber));
+      displayBox.innerText = operate(operator, firstNumber, secondNumber)
     });
+  } else if (btn[i].textContent === "clear") {
+    btn[i].addEventListener("click", () => {
+      firstNumber = 0;
+      secondNumber = 0;
+      displayBox.innerText = "";
+    })
   }
 }
