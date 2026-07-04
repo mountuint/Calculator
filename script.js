@@ -33,8 +33,6 @@ function operate(operator, number1, number2) {
 const btn = document.querySelectorAll(".button");
 let displayBox = document.querySelector(".displayBox");
 
-//let displayNumber = 0
-
 for (let i = 0; i < btn.length; i++) {
   if (Number.isFinite(Number(btn[i].textContent))) {
     btn[i].addEventListener("click", () => {
@@ -49,28 +47,15 @@ for (let i = 0; i < btn.length; i++) {
   ) {
     btn[i].addEventListener("click", () => {
       firstNumber = Number(displayBox.innerText)
-      //alert(firstNumber)
       displayBox.innerText += btn[i].innerText;
       operator = btn[i].innerText;
       console.log(btn[i].innerText)
-      //alert(displayBox.innerText.indexOf(operator))
-      //alert(operator);
     });
   } else if (btn[i].textContent === "=") {
     btn[i].addEventListener("click", () => {
-      //console.log(operator)
       let indexOfOperator = displayBox.innerText.indexOf(operator)
-      //console.log(displayBox.innerText)
       let secondNumber = Number(displayBox.innerText.substring(indexOfOperator + 1, displayBox.innerText.length))
-      //console.log(secondNumber)
-      //alert(displayBox.innerText - displayBox.innerText.replace(/[+-/*]/g, "") )
       console.log(operate(operator, firstNumber, secondNumber));
     });
   }
 }
-
-/*if (Number.isFinite(Number(btn[10].textContent)) === false) {
-    btn[10].addEventListener("click", () => {
-      console.log((displayBox.innerText += btn[10].innerText));
-    });
-  }*/
