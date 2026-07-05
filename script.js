@@ -50,30 +50,40 @@ for (let i = 0; i < btn.length; i++) {
       displayBox.innerText += btn[i].innerText;
       operator = btn[i].innerText;
       console.log(displayBox.innerText);
-      //alert(firstNumber)
       let operatorArray = displayBox.innerText.match(/[+\-*/]/g);
       if (operatorArray.length >= 2) {
-        console.log("it worked");
+        //console.log("it worked");
         //alert(displayBox.innerText)
         let indexOfOperator = displayBox.innerText.indexOf(operator);
-        let firstNumber = Number(displayBox.innerText.substring(0, indexOfOperator))
-        //alert(firstNumber)
-        //console.log(indexOfOperator)
+        let firstNumber = Number(
+          displayBox.innerText.substring(0, indexOfOperator),
+        );
+        alert(firstNumber);
+        //alert(indexOfOperator)
+        //alert(displayBox.innerText.length)
         let secondNumber = Number(
           displayBox.innerText.substring(
             indexOfOperator + 1,
             displayBox.innerText.length - 1,
           ),
         );
-        console.log(firstNumber)
-        console.log(secondNumber)
-        console.log(operator)
-        displayBox.innerText = operate(operator, firstNumber, secondNumber);
+        alert(displayBox.innerText);
+        //displayBox.innerText = operate(operator, firstNumber, secondNumber);
+        //let displayBoxValue = displayBox.innerText
+        let displayBoxValue = operate(operator, firstNumber, secondNumber);
+        console.log(displayBoxValue);
+        displayBox.innerText = displayBoxValue + operator;
+        alert(displayBox.innerText);
       }
     });
   } else if (btn[i].textContent === "=") {
     btn[i].addEventListener("click", () => {
       let indexOfOperator = displayBox.innerText.indexOf(operator);
+      let firstNumber = Number(
+        displayBox.innerText.substring(0, indexOfOperator),
+      );
+      //alert(firstNumber);
+      //let indexOfOperator = displayBox.innerText.indexOf(operator);
       let secondNumber = Number(
         displayBox.innerText.substring(
           indexOfOperator + 1,
