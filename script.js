@@ -1,3 +1,4 @@
+console.log("hello")
 function addNumbers(number1, number2) {
   return number1 + number2;
 }
@@ -65,9 +66,9 @@ for (let i = 0; i < btn.length; i++) {
           indexOfOperator + 1,
           displayBox.innerText.length - 1,
         );
-        
+
         alert(secondNumber);
-        
+
         let displayBoxValue = operate(operator, firstNumber, secondNumber);
         console.log(displayBoxValue);
         displayBox.innerText = displayBoxValue + operator;
@@ -77,18 +78,13 @@ for (let i = 0; i < btn.length; i++) {
   } else if (btn[i].textContent === "=") {
     btn[i].addEventListener("click", () => {
       let indexOfOperator = displayBox.innerText.indexOf(operator);
-      let firstNumber = Number(
-        displayBox.innerText.substring(0, indexOfOperator),
+      firstNumber = displayBox.innerText.substring(0, indexOfOperator);
+
+      secondNumber = displayBox.innerText.substring(
+        indexOfOperator + 1,
+        displayBox.innerText.length,
       );
-      
-      let secondNumber = Number(
-        displayBox.innerText.substring(
-          indexOfOperator + 1,
-          displayBox.innerText.length,
-        ),
-      );
-      console.log(firstNumber, typeof firstNumber);
-      console.log(secondNumber, typeof secondNumber);
+
       displayBox.innerText = operate(operator, firstNumber, secondNumber);
     });
   } else if (btn[i].textContent === "clear") {
