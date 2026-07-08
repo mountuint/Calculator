@@ -37,11 +37,12 @@ for (let i = 0; i < btn.length; i++) {
   if (Number.isFinite(Number(btn[i].textContent))) {
     btn[i].addEventListener("click", () => {
       displayBox.textContent += btn[i].textContent;
-      firstNumber += btn[i].textContent;
-      console.log("this is the firstNumber: " + firstNumber)
       if(operator !== "") {
         secondNumber += btn[i].textContent
         console.log("this is the secondNumber: " + secondNumber)
+      } else if (operator == "") {
+        firstNumber += btn[i].textContent
+        console.log("this is the firstNumber: " + firstNumber)
       }
     });
   } else if (
@@ -54,9 +55,9 @@ for (let i = 0; i < btn.length; i++) {
       displayBox.textContent += btn[i].textContent;
       operator = btn[i].textContent
       console.log(operator)
-      indexOfOperator = displayBox.textContent.indexOf(operator)
-      firstNumber = displayBox.textContent.substring(0, indexOfOperator)
-      console.log(firstNumber)
+      //indexOfOperator = displayBox.textContent.indexOf(operator)
+      //firstNumber = displayBox.textContent.substring(0, indexOfOperator)
+      
     })
   } else if(btn[i].textContent === "=") {
     btn[i].addEventListener("click", () => {
