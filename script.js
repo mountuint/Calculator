@@ -56,35 +56,31 @@ for (let i = 0; i < btn.length; i++) {
       displayBox.textContent += btn[i].textContent;
       operator = btn[i].textContent;
       console.log(operator);
-      console.log(displayBox.textContent)
+      console.log(displayBox.textContent);
 
       if (secondNumber !== "") {
-        outcome = operate(
-          operator,
-          Number(firstNumber),
-          Number(secondNumber),
-        );
+        outcome = operate(operator, Number(firstNumber), Number(secondNumber));
         displayBox.textContent = operate(
           operator,
           Number(firstNumber),
           Number(secondNumber),
         );
-        alert(outcome)
+        alert(outcome);
       }
     });
-  } else if (btn[i].textContent === "=") {              //look at this part
-    btn[i].addEventListener("click", () => {   
-      outcome = operate(
-          operator,
-          Number(firstNumber),
-          Number(secondNumber),
-        );         
+  } else if (btn[i].textContent === "=") {
+    //look at this part
+    btn[i].addEventListener("click", () => {
+      outcome = operate(operator, Number(firstNumber), Number(secondNumber));
       displayBox.textContent = operate(
         operator,
         Number(firstNumber),
         Number(secondNumber),
       );
-      alert(outcome)
+      alert(outcome);
+      firstNumber = outcome
+      secondNumber = ""
+      //console.log(firstNumber)
     });
   } else if (btn[i].textContent === ".") {
     btn[i].addEventListener("click", () => {
