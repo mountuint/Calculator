@@ -14,8 +14,8 @@ function divideNumbers(firstNumber, secondNumber) {
   return firstNumber / secondNumber;
 }
 
-let firstNumber = 0;
-let secondNumber = 0;
+let firstNumber = [];
+let secondNumber = [];
 let operator = "";
 
 function operate(operator, firstNumber, secondNumber) {
@@ -37,6 +37,12 @@ for (let i = 0; i < btn.length; i++) {
   if (Number.isFinite(Number(btn[i].textContent))) {
     btn[i].addEventListener("click", () => {
       displayBox.textContent += btn[i].textContent;
+      firstNumber += btn[i].textContent;
+      console.log("this is the firstNumber: " + firstNumber)
+      if(operator !== "") {
+        secondNumber += btn[i].textContent
+        console.log("this is the secondNumber: " + secondNumber)
+      }
     });
   } else if (
     btn[i].textContent === "+" ||
@@ -46,6 +52,11 @@ for (let i = 0; i < btn.length; i++) {
   ) {
     btn[i].addEventListener("click", () => {
       displayBox.textContent += btn[i].textContent;
+      operator = btn[i].textContent
+      console.log(operator)
+      indexOfOperator = displayBox.textContent.indexOf(operator)
+      firstNumber = displayBox.textContent.substring(0, indexOfOperator)
+      console.log(firstNumber)
     })
   } else if(btn[i].textContent === "=") {
     btn[i].addEventListener("click", () => {
