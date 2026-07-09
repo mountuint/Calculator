@@ -1,19 +1,3 @@
-function addNumbers(firstNumber, secondNumber) {
-  return firstNumber + secondNumber;
-}
-
-function extractNumbers(firstNumber, secondNumber) {
-  return firstNumber - secondNumber;
-}
-
-function multiplyNumbers(firstNumber, secondNumber) {
-  return firstNumber * secondNumber;
-}
-
-function divideNumbers(firstNumber, secondNumber) {
-  return firstNumber / secondNumber;
-}
-
 let firstNumber = "";
 let secondNumber = "";
 let operator = "";
@@ -21,13 +5,13 @@ let outcome = 0;
 
 function operate(operator, firstNumber, secondNumber) {
   if (operator === "+") {
-    return addNumbers(firstNumber, secondNumber);
+    return firstNumber + secondNumber;
   } else if (operator === "-") {
-    return extractNumbers(firstNumber, secondNumber);
+    return firstNumber - secondNumber;
   } else if (operator === "*") {
-    return multiplyNumbers(firstNumber, secondNumber);
+    return firstNumber * secondNumber;
   } else if (operator === "/") {
-    return divideNumbers(firstNumber, secondNumber);
+    return firstNumber / secondNumber;
   }
 }
 
@@ -65,11 +49,14 @@ for (let i = 0; i < btn.length; i++) {
           Number(firstNumber),
           Number(secondNumber),
         );
-        alert(outcome);
+        //alert(outcome);
+        firstNumber = outcome;
+        alert(firstNumber);
+        secondNumber = "";
+        console.log("value of the second number " + secondNumber);
       }
     });
   } else if (btn[i].textContent === "=") {
-    //look at this part
     btn[i].addEventListener("click", () => {
       outcome = operate(operator, Number(firstNumber), Number(secondNumber));
       displayBox.textContent = operate(
@@ -78,8 +65,8 @@ for (let i = 0; i < btn.length; i++) {
         Number(secondNumber),
       );
       alert(outcome);
-      firstNumber = outcome
-      secondNumber = ""
+      firstNumber = outcome;
+      secondNumber = "";
       //console.log(firstNumber)
     });
   } else if (btn[i].textContent === ".") {
