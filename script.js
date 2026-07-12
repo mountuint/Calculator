@@ -1,107 +1,162 @@
-function addNumbers(firstNumber, secondNumber) {
-  return firstNumber + secondNumber;
+function addNumbers(a, b) {
+  return a + b;
 }
 
-function extractNumbers(firstNumber, secondNumber) {
-  return firstNumber - secondNumber;
+function subtractNumbers(a, b) {
+  return a - b;
 }
 
-function multiplyNumbers(firstNumber, secondNumber) {
-  return firstNumber * secondNumber;
+function multiplyNumbers(a, b) {
+  return a * b;
 }
 
-function divideNumbers(firstNumber, secondNumber) {
-  return firstNumber / secondNumber;
+function divideNumbers(a, b) {
+  return a / b;
+}
+
+function operate(operator, firstNumber, secondNumber) {
+  switch (operator) {
+    case "+":
+      return addNumbers(firstNumber, secondNumber);
+    case "-":
+      return subtractNumbers(firstNumber, secondNumber);
+    case "*":
+      return multiplyNumbers(firstNumber, secondNumber);
+    case "/":
+      if (secondNumber === 0) {
+        return "Nice try 😏";
+      }
+      return divideNumbers(firstNumber, secondNumber);
+  }
 }
 
 let firstNumber = "";
 let secondNumber = "";
 let operator = "";
-let outcome = 0;
+let resultDisplayed = false;
 
-function operate(operator, firstNumber, secondNumber) {
-  if (operator === "+") {
-    return addNumbers(firstNumber, secondNumber);
-  } else if (operator === "-") {
-    return extractNumbers(firstNumber, secondNumber);
-  } else if (operator === "*") {
-    return multiplyNumbers(firstNumber, secondNumber);
-  } else if (operator === "/") {
-    return divideNumbers(firstNumber, secondNumber);
-  }
-}
-
-const btn = document.querySelectorAll("button");
 const displayBox = document.querySelector(".displayBox");
+const buttons = document.querySelectorAll("button");
 
-for (let i = 0; i < btn.length; i++) {
-  if (Number.isFinite(Number(btn[i].textContent))) {
-    btn[i].addEventListener("click", () => {
-      displayBox.textContent += btn[i].textContent;
-      if (operator !== "") {
-        secondNumber += btn[i].textContent;
-        console.log("this is the secondNumber: " + secondNumber);
-      } else if (operator == "") {
-        firstNumber += btn[i].textContent;
-        console.log("this is the firstNumber: " + firstNumber);
+buttons.forEach((button) => {
+  button.addEventListener("click", () => {
+    const value = button.textContent;
+
+    if (Number.isFinite(Number(value)) || value === ".") {
+      if (resultDisplayed) {
+        firstNumber = "";
+        secondNumber = "";
+        operator = "";
+        displayBox.textContent = "";
+        resultDisplayed = false;
       }
-    });
-  } else if (
-    btn[i].textContent === "+" ||
-    btn[i].textContent === "-" ||
-    btn[i].textContent === "/" ||
-    btn[i].textContent === "*"
-  ) {
-    btn[i].addEventListener("click", () => {
-      displayBox.textContent += btn[i].textContent;
-      operator = btn[i].textContent;
-      console.log(operator);
-      console.log(displayBox.textContent);  
 
-      if (secondNumber !== "") {
-        outcome = operate(operator, Number(firstNumber), Number(secondNumber));
-        displayBox.textContent = operate(
+      if (operator === "") {
+        if (value === "." && firstNumber.includes(".")) return;
+
+        if (value === "." && firstNumber === "") {
+          firstNumber = "0.";
+        } else {
+          firstNumber += value;
+        }
+
+        displayBox.textContent = firstNumber;
+      } else {
+        if (value === "." && secondNumber.includes(".")) return;
+
+        if (value === "." && secondNumber === "") {
+          secondNumber = "0.";
+        } else {
+          secondNumber += value;
+        }
+
+        displayBox.textContent = firstNumber + operator + secondNumber;
+      }
+    }
+
+    else if (["+", "-", "*", "/"].includes(value)) {
+      if (firstNumber === "") return;
+
+      if (operator === "") {
+        operator = value;
+        displayBox.textContent = firstNumber + operator;
+      }
+
+      else if (secondNumber !== "") {
+        let result = operate(
           operator,
           Number(firstNumber),
           Number(secondNumber),
         );
-        //alert(outcome);
-        firstNumber = outcome
-        alert(firstNumber)
+
+        if (result === "Nice try 😏") {
+          displayBox.textContent = result;
+
+          firstNumber = "";
+          secondNumber = "";
+          operator = "";
+          resultDisplayed = true;
+
+          return;
+        }
+
+        if (typeof result === "number") {
+          result = Math.round(result * 1000000) / 1000000;
+        }
+
+        firstNumber = String(result);
+
         secondNumber = "";
-        console.log("value of the second number " + secondNumber)
+        operator = value;
+
+        displayBox.textContent = firstNumber + operator;
       }
-    });
-  } else if (btn[i].textContent === "=") {
-    btn[i].addEventListener("click", () => {
-      outcome = operate(operator, Number(firstNumber), Number(secondNumber));
-      displayBox.textContent = operate(
-        operator,
-        Number(firstNumber),
-        Number(secondNumber),
-      );
-      alert(outcome);
-      firstNumber = outcome;
-      secondNumber = "";
-      //console.log(firstNumber)
-    });
-  } else if (btn[i].textContent === ".") {
-    btn[i].addEventListener("click", () => {
-      displayBox.textContent += btn[i].textContent;
-      if (operator !== "") {
-        secondNumber += btn[i].textContent;
-        console.log("this is the secondNumber: " + secondNumber);
-      } else if (operator == "") {
-        firstNumber += btn[i].textContent;
-        console.log("this is the firstNumber: " + firstNumber);
+
+      else {
+        operator = value;
+        displayBox.textContent = firstNumber + operator;
       }
-    });
-  } else if (btn[i].textContent === "clear") {
-    btn[i].addEventListener("click", () => {
-      displayBox.textContent = "";
+    }
+
+    else if (value === "=") {
+      if (operator !== "" && secondNumber !== "") {
+        let result = operate(
+          operator,
+          Number(firstNumber),
+          Number(secondNumber),
+        );
+
+        if (result === "Nice try 😏") {
+          displayBox.textContent = result;
+
+          firstNumber = "";
+          secondNumber = "";
+          operator = "";
+          resultDisplayed = true;
+
+          return;
+        }
+
+        if (typeof result === "number") {
+          result = Math.round(result * 1000000) / 1000000;
+        }
+
+        firstNumber = String(result);
+
+        displayBox.textContent = firstNumber;
+        resultDisplayed = true;
+
+        secondNumber = "";
+        operator = "";
+      }
+    }
+
+    else if (value === "clear") {
       firstNumber = "";
       secondNumber = "";
       operator = "";
-    });
-  }
-}
+      displayBox.textContent = "";
+      resultDisplayed = false;
+    }
+  });
+});
