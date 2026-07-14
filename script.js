@@ -24,7 +24,7 @@ function operate(operator, firstNumber, secondNumber) {
       return multiplyNumbers(firstNumber, secondNumber);
     case "/":
       if (secondNumber === 0) {
-        return "Nice try 😏";
+        return "Nice try hehe";
       }
       return divideNumbers(firstNumber, secondNumber);
   }
@@ -72,24 +72,22 @@ buttons.forEach((button) => {
 
         displayBox.textContent = firstNumber + operator + secondNumber;
       }
-    }
-
-    else if (["+", "-", "*", "/"].includes(value)) {
+    } else if (["+", "-", "*", "/"].includes(value)) {
       if (firstNumber === "") return;
 
       if (operator === "") {
         operator = value;
+        resultDisplayed = false;
+        
         displayBox.textContent = firstNumber + operator;
-      }
-
-      else if (secondNumber !== "") {
+      } else if (secondNumber !== "") {
         let result = operate(
           operator,
           Number(firstNumber),
           Number(secondNumber),
         );
 
-        if (result === "Nice try 😏") {
+        if (result === "Nice try hehe") {
           displayBox.textContent = result;
 
           firstNumber = "";
@@ -101,7 +99,7 @@ buttons.forEach((button) => {
         }
 
         if (typeof result === "number") {
-          result = Math.round(result * 1000000) / 1000000;
+          result = Math.round(result * 1000) / 1000;
         }
 
         firstNumber = String(result);
@@ -110,15 +108,11 @@ buttons.forEach((button) => {
         operator = value;
 
         displayBox.textContent = firstNumber + operator;
-      }
-
-      else {
+      } else {
         operator = value;
         displayBox.textContent = firstNumber + operator;
       }
-    }
-
-    else if (value === "=") {
+    } else if (value === "=") {
       if (operator !== "" && secondNumber !== "") {
         let result = operate(
           operator,
@@ -126,7 +120,7 @@ buttons.forEach((button) => {
           Number(secondNumber),
         );
 
-        if (result === "Nice try 😏") {
+        if (result === "Nice try hehe") {
           displayBox.textContent = result;
 
           firstNumber = "";
@@ -138,7 +132,7 @@ buttons.forEach((button) => {
         }
 
         if (typeof result === "number") {
-          result = Math.round(result * 1000000) / 1000000;
+          result = Math.round(result * 1000) / 1000;
         }
 
         firstNumber = String(result);
@@ -149,9 +143,7 @@ buttons.forEach((button) => {
         secondNumber = "";
         operator = "";
       }
-    }
-
-    else if (value === "clear") {
+    } else if (value === "clear") {
       firstNumber = "";
       secondNumber = "";
       operator = "";
